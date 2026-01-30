@@ -2,13 +2,29 @@
 
 Read-only MCP Server for querying Permit.io configuration.
 
+## Quick Start with npx
+
+Run directly without installation:
+
+```bash
+PERMIT_API_KEY=your_key npx permit-mcp-server
+```
+
 ## Requirements
 
 - Node.js 22+
-- pnpm
+- pnpm (for development)
 - Docker (optional)
 
-## Local Installation
+## Installation
+
+### Global Installation
+
+```bash
+npm install -g permit-mcp-server
+```
+
+### Local Installation
 
 ```bash
 cd permit-mcp
@@ -80,6 +96,25 @@ docker logs -f permit-mcp
 ## Usage with Claude Code
 
 Add to workspace `.mcp.json`:
+
+### Using npx (Recommended)
+
+```json
+{
+  "mcpServers": {
+    "permit": {
+      "command": "npx",
+      "args": ["-y", "permit-mcp-server"],
+      "env": {
+        "PERMIT_API_KEY": "${PERMIT_API_KEY}",
+        "PERMIT_PROJECT_ID": "default"
+      }
+    }
+  }
+}
+```
+
+### Using local installation
 
 ```json
 {
