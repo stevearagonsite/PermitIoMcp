@@ -1,14 +1,14 @@
 # Permit MCP Server
 
-MCP Server de solo lectura para consultar la configuración de Permit.io.
+Read-only MCP Server for querying Permit.io configuration.
 
-## Requisitos
+## Requirements
 
 - Node.js 22+
 - pnpm
-- Docker (opcional)
+- Docker (optional)
 
-## Instalación Local
+## Local Installation
 
 ```bash
 cd permit-mcp
@@ -16,9 +16,9 @@ pnpm install
 pnpm build
 ```
 
-## Configuración
+## Configuration
 
-Crear un archivo `.env` basado en `.env.example`:
+Create a `.env` file based on `.env.example`:
 
 ```env
 PERMIT_API_KEY=permit_key_xxxxx
@@ -26,60 +26,60 @@ PERMIT_PROJECT_ID=default
 PERMIT_ENV_ID=dev
 ```
 
-### Variables de Entorno
+### Environment Variables
 
-| Variable | Requerida | Descripción |
-|----------|-----------|-------------|
-| `PERMIT_API_KEY` | Sí | API Key de Permit.io |
-| `PERMIT_PROJECT_ID` | No | ID del proyecto (default: "default") |
-| `PERMIT_ENV_ID` | No | Environment por defecto |
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `PERMIT_API_KEY` | Yes | Permit.io API Key |
+| `PERMIT_PROJECT_ID` | No | Project ID (default: "default") |
+| `PERMIT_ENV_ID` | No | Default environment |
 
 ## Docker
 
-### Levantar con Docker Compose
+### Start with Docker Compose
 
 ```bash
 cd permit-mcp && docker compose -f docker-compose.local.yml up -d --build
 ```
 
-### Detener
+### Stop
 
 ```bash
 docker compose -f docker-compose.local.yml down
 ```
 
-### Ver logs
+### View logs
 
 ```bash
 docker logs -f permit-mcp
 ```
 
-## Tools Disponibles
+## Available Tools
 
 ### Environments
 
-- **list-environments**: Lista todos los environments del proyecto
-- **get-environment**: Obtiene detalles de un environment específico
+- **list-environments**: List all environments in the project
+- **get-environment**: Get details of a specific environment
 
 ### Roles
 
-- **list-roles**: Lista todos los roles de un environment
-- **get-role**: Obtiene un rol con sus permisos
+- **list-roles**: List all roles in an environment
+- **get-role**: Get a role with its permissions
 
 ### Resources
 
-- **list-resources**: Lista todos los resources definidos
-- **get-resource**: Obtiene un resource con sus acciones y atributos
+- **list-resources**: List all defined resources
+- **get-resource**: Get a resource with its actions and attributes
 
 ### Users
 
-- **list-users**: Lista usuarios con filtros opcionales (paginación, búsqueda)
-- **get-user**: Obtiene información de un usuario
-- **get-user-permissions**: Obtiene permisos efectivos de un usuario
+- **list-users**: List users with optional filters (pagination, search)
+- **get-user**: Get user information
+- **get-user-permissions**: Get effective permissions for a user
 
-## Uso con Claude Code
+## Usage with Claude Code
 
-Agregar a `.mcp.json` del workspace:
+Add to workspace `.mcp.json`:
 
 ```json
 {
@@ -96,33 +96,33 @@ Agregar a `.mcp.json` del workspace:
 }
 ```
 
-## Desarrollo
+## Development
 
 ```bash
-# Compilar
+# Build
 pnpm build
 
 # Watch mode
 pnpm dev
 
-# Verificar tipos
+# Type check
 pnpm typecheck
 
-# Ejecutar
+# Run
 pnpm start
 ```
 
-## Arquitectura
+## Architecture
 
 ```
 permit-mcp/
 ├── src/
-│   ├── index.ts              # Entry point del MCP server
-│   ├── permit-client.ts      # Cliente HTTP para Permit.io API
+│   ├── index.ts              # MCP server entry point
+│   ├── permit-client.ts      # HTTP client for Permit.io API
 │   └── types/
-│       └── permit.ts         # Tipos de Permit.io API
-├── Dockerfile                # Imagen Docker
-├── docker-compose.local.yml  # Docker Compose para desarrollo
+│       └── permit.ts         # Permit.io API types
+├── Dockerfile                # Docker image
+├── docker-compose.local.yml  # Docker Compose for development
 ├── package.json
 ├── tsconfig.json
 └── README.md
