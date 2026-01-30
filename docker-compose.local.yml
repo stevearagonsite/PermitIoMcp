@@ -1,0 +1,13 @@
+services:
+  permit-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: permit-mcp
+    environment:
+      - PERMIT_API_KEY=${PERMIT_API_KEY}
+      - PERMIT_PROJECT_ID=${PERMIT_PROJECT_ID:-default}
+      - PERMIT_ENV_ID=${PERMIT_ENV_ID:-dev}
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
